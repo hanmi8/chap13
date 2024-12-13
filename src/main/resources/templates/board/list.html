@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">Board List</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Writer Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="board : ${boardList}">
+                    <td th:text="${board.bno}"></td>
+                    <td th:text="${board.title}"></td>
+                    <td th:text="${board.content}"></td>
+                    <td th:text="${board.writerEmail}"></td>
+                    <td>
+                        <a th:href="@{/board/edit/{id}(id=${board.bno})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/board/delete/{id}(id=${board.bno})}" class="btn btn-danger btn-sm" 
+                           onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/board/register}" class="btn btn-primary mt-3">Add New Board</a>
+
+    </th:block>
+
+</th:block>
